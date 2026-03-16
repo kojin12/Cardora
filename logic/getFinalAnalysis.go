@@ -1,20 +1,20 @@
 package logic
 
 type FinalResult struct {
-	Ema50      float64
-	Ema200     float64
-	Trend15    string
-	Trend60    string
-	Rsi        float64
-	RsiFilter  string
-	MACD       map[string]float64
-	Atr        float64
-	Volume     string
-	Patterns   map[string]bool
-	Supports   []float64
-	Resistance []float64
-	ADX        float64
-	ATRPercent float64
+	Ema50         float64
+	Ema200        float64
+	TrendTF       string
+	TrendSeniorTF string
+	Rsi           float64
+	RsiFilter     string
+	MACD          map[string]float64
+	Atr           float64
+	Volume        string
+	Patterns      map[string]bool
+	Supports      []float64
+	Resistance    []float64
+	ADX           float64
+	ATRPercent    float64
 }
 
 func Final(candles [][]string, candles60 [][]string) FinalResult {
@@ -27,7 +27,7 @@ func Final(candles [][]string, candles60 [][]string) FinalResult {
 
 	res.Ema200 = ema200
 
-	res.Trend15 = GetTrend15(res.Ema50, res.Ema200)
+	res.TrendTF = GetTrend15(res.Ema50, res.Ema200)
 
 	reg := RegCandles(candles)
 
@@ -42,7 +42,7 @@ func Final(candles [][]string, candles60 [][]string) FinalResult {
 
 	ema200_60 := GetEMA(candles60, 200)
 
-	res.Trend60 = GetTrend60(ema50_60, ema200_60)
+	res.TrendSeniorTF = GetTrend60(ema50_60, ema200_60)
 
 	rsi := GetRSI(candles)
 	res.Rsi = rsi

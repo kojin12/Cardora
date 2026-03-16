@@ -31,7 +31,8 @@ func GetDataHandlers(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "pair is required", http.StatusBadRequest)
 		return
 	}
-	if timeFrame == "" {
+	_, ok := config.TFConfig[timeFrame]
+	if timeFrame == "" && !ok {
 		http.Error(w, "timeframe is required", http.StatusBadRequest)
 		return
 	}
@@ -46,10 +47,13 @@ func GetDataHandlers(w http.ResponseWriter, r *http.Request) {
 	if !ok {
 		http.Error(w, "unknown pair", http.StatusBadRequest)
 	}
+	timeFrames, _ := config.TFConfig[timeFrame]
+	TF := timeFrames.TF
+	SeniorTF := timeFrames.SeniorTF
 
 	if market == "mexc" {
-		ohlc, price := getdatamexc.GetMexcOHLC(pairSymbol.Mexc, timeFrame, limit)
-		ohlc60, _ := getdatamexc.GetMexcOHLC(pairSymbol.Mexc, "60m", limit)
+		ohlc, price := getdatamexc.GetMexcOHLC(pairSymbol.Mexc, TF, limit)
+		ohlc60, _ := getdatamexc.GetMexcOHLC(pairSymbol.Mexc, SeniorTF, limit)
 
 		response = logic.Final(ohlc, ohlc60)
 		score = logic.GetScore(response, price)

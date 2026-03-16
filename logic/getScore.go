@@ -15,19 +15,19 @@ func GetScore(data FinalResult, price float64) int {
 
 	score := 0.0
 
-	if data.Trend15 == "Up" {
+	if data.TrendTF == "Up" {
 		score += weights["Trend15"]
 	} else {
 		score -= weights["Trend15"]
 	}
 
-	if data.Trend60 == "Up" {
+	if data.TrendSeniorTF == "Up" {
 		score += weights["Trend60"]
 	} else {
 		score -= weights["Trend60"]
 	}
 
-	if data.Trend15 == data.Trend60 {
+	if data.TrendTF == data.TrendSeniorTF {
 		score += weights["TrendMatch"]
 	} else {
 		score -= weights["TrendMatch"]
