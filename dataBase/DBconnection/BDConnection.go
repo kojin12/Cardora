@@ -7,7 +7,7 @@ import (
 )
 
 func ConnectionToBD(ctx context.Context) (*pgx.Conn, error) {
-	conn, err := pgx.Connect(ctx, "postgres://postgres:135642@localhost:5432/postgres")
+	conn, err := pgx.Connect(ctx, "postgres://postgres:15Card47019_!DORA_77Null@localhost:5432/postgres")
 	if err != nil {
 		return nil, err
 	}

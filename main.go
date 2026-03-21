@@ -18,14 +18,9 @@ func main() {
 	if err = database.CreateTable(ctx, conn); err != nil {
 		fmt.Println(err)
 	}
+	err = database.CreateTableNft(ctx, conn)
+	if err != nil {
+		fmt.Println(err)
+	}
 
-	//5150505792, @Diozarm
-	err = database.InsertRow(ctx, conn, "@Diozarm", "5150505792")
-	if err != nil {
-		fmt.Println("Ошибка, пользователь не добавлен:", err)
-	}
-	err = database.InsertRow(ctx, conn, "@emi4ka21", "1488398562")
-	if err != nil {
-		fmt.Println("Ошибка, пользователь не добавлен:", err)
-	}
 }
