@@ -14,7 +14,7 @@ func CreateTableUsers(ctx context.Context, connection *pgx.Conn) error {
 		telegram_id VARCHAR(70) UNIQUE NOT NULL,
 		telegram_username VARCHAR(70) UNIQUE NOT NULL,
 		balance DECIMAL(20,2) DEFAULT 0.0,
-		subscribe_end_date TIMESTAMP,
+		subscribe_end_date TIMESTAMP DEFAULT NOW(),
 		wallets JSONB DEFAULT '[]'
 	);
 	`
