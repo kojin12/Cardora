@@ -15,12 +15,14 @@ func main() {
 	} else {
 		fmt.Println("Подключение установленно")
 	}
-	if err = database.CreateTable(ctx, conn); err != nil {
-		fmt.Println(err)
+
+	t := database.BuySubscribe{
+		TelegramID:      "123123",
+		SubscribeAmount: "365",
 	}
-	err = database.CreateTableNft(ctx, conn)
+	p, err := database.GetSubscribe(ctx, conn, t)
 	if err != nil {
 		fmt.Println(err)
 	}
-
+	fmt.Println(p)
 }
